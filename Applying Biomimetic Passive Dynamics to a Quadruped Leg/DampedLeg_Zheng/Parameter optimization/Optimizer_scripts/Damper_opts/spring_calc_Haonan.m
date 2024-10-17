@@ -5,11 +5,14 @@
 clear; clc; close('all');
 
 % Add paths needed for loading data and using functions
-addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer functions and data')
-addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\IC_check')
-addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results')
-addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer_scripts\ParticleSwarmOpt')
-addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results\Robot_damping_calcs_Haonan')
+addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Krnacik'))
+addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Zheng'))
+
+% addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer functions and data')
+% addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\IC_check')
+% addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results')
+% addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer_scripts\ParticleSwarmOpt')
+% addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results\Robot_damping_calcs_Haonan')
 
 % Create folder to save results to and add file path
 % folder_title = 'Robot_spring_calcs';
@@ -34,7 +37,7 @@ load('-mat', 'start_indices')
 load('-mat', 'end_indices')
 
 % Load calculated damping data
-load('-mat','Results_HaonanK119_adjusted')
+load('-mat','Results_HaonanK119')
 
 % Define muscles and trials, respectively, to optimize to (chosen by me)
 muscles = [1 3 4 5 7];
@@ -72,7 +75,7 @@ knee_var = b_sols(2);
 %% Load EOM
 
 % Define equations of motion from saved EOM file
-clear
+load('EOM.mat')
 fprintf('\nEOM loaded.\n')
 
 % Compile EOM into single variable
@@ -151,6 +154,7 @@ trials = [ 5 1 1 1 ];
 % Define muscle names
 muscle_names = {'IP', 'GS', 'ST', 'BFp'};
 data_title = cell(1,length(muscles));
+
 
 % Create data titles
 for n_i = 1:length(muscles)
@@ -316,8 +320,8 @@ end
 legend('Hip response', 'Simulated hip response', 'Knee response', 'Optimized knee response', 'Ankle response', 'Simulated ankle response')
 
 %% save results - optimized parameters and figure
-folder_title = 'Robot_spring_calcs_Haonan';
-save(strcat('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results\', folder_title, '\SpringOptK119adj.mat'), 'k_1', 'k_2','k_3','thetas_ode', 'thetas', 'time', 'thetabias_val', 'omega_simact_zeta_simact')
-saveas(fig, strcat('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results\', folder_title, '\SpringOptK11adj9.fig'))
-fprintf('Data saved.\n')
+% folder_title = 'Robot_spring_calcs_Haonan';
+% save(strcat('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results\', folder_title, '\SpringOptK119.mat'), 'k_1', 'k_2','k_3','thetas_ode', 'thetas', 'time', 'thetabias_val', 'omega_simact_zeta_simact')
+% saveas(fig, strcat('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results\', folder_title, '\SpringOptK119.fig'))
+% fprintf('Data saved.\n')
 

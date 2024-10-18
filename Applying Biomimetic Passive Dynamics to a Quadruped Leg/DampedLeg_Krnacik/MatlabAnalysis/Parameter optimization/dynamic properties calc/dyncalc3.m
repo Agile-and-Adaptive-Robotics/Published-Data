@@ -105,5 +105,5 @@ for n = 1:length(muscles)
     
     
 end
-%%
-save('jointdyn3.mat', 'omegas', 'zetas', 'settlingtime', 'risetime')
+
+% save('jointdyn3.mat', 'omegas', 'zetas', 'settlingtime', 'risetime')

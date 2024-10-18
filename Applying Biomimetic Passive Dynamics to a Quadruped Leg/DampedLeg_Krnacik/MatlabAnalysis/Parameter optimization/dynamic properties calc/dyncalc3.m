@@ -11,7 +11,8 @@
 clear; clc;
 
 % Add paths needed for loading data and using functions
-addpath('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Optimizer functions and data')
+addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Krnacik'))
+% addpath('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Optimizer functions and data')
 
 %% Load data
 
@@ -104,5 +105,5 @@ for n = 1:length(muscles)
     
     
 end
-
+%%
 save('jointdyn3.mat', 'omegas', 'zetas', 'settlingtime', 'risetime')

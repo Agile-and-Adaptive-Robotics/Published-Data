@@ -5,7 +5,7 @@
 % approximated and set. As all five trials were solved for in one batch,
 % inital velocity was calculated/approximated from the first and second
 % joint angle position instead of optimized for.
-
+  
 clear; clc; close('all');
 
 % Add paths needed for loading data and using functions
@@ -44,6 +44,7 @@ end
 
 % Set start time step
 time_step = 0.001;                                                  % [ s ]
+
 
 %% Set optimization specifications (IC, BC, options)
 
@@ -101,6 +102,7 @@ data.trials = trials;
 data.start_indices = start_indices;
 data.end_indices = end_indices;
 data.time_step = time_step;
+data.sysProp = load('-mat','MechPropRat');
 
 % Run fminsearch on cost function
 fprintf('Running optimization...\n')
@@ -119,7 +121,7 @@ fprintf('\nParameter optimization achieved. Producing results.\n')
 omega_simact_zeta_simact = zeros(length(muscles),4);
 
 % Produce figure
-fig = figure( 'Color', 'w');
+fig = figure( 'Color', 'w'); 
     
 % Run simulation on each trial with solved values
 for m = 1:length(muscles)
@@ -150,7 +152,7 @@ for m = 1:length(muscles)
     param = [ w0s set_var(1) param_opt_results(1) set_var(3) set_var(2) param_opt_results(2) set_var(4) 0 0 0];
 
     % Run ODE
-    [ time_ode, thetas_ode, thetabias_val ] = dynamics_func(param, dui, time, thetas, thetabias_sym);
+    [ time_ode, thetas_ode, thetabias_val ] = dynamics_func(param, dui, time, thetas, thetabias_sym, 'MechPropRat');
 
     % Calculate damping ratio land natural frequency
     % Find peaks and location of sim response and actual response for knee
@@ -209,8 +211,8 @@ end
 legend('Hip response', 'Simulated hip response', 'Knee response', 'Optimized knee response', 'Ankle response', 'Simulated ankle response')
     
 % save results - optimized parameters and figure
-% save(strcat('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Results\', folder_title, '\AllTrialsKneeResults.mat'), 'param_opt_results', 'thetas_ode', 'thetas', 'time', 'thetabias_val', 'IC_data', 'omega_simact_zeta_simact')
-% saveas(fig, strcat('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Results\', folder_title, '\AllTrialsKneeResults.fig'))
+% save(strcat('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Results\', folder_title, '\AllTrialsKneeResultsRat.mat'), 'param_opt_results', 'thetas_ode', 'thetas', 'time', 'thetabias_val', 'IC_data', 'omega_simact_zeta_simact')
+% saveas(fig, strcat('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Results\', folder_title, '\AllTrialsKneeResultsRat.fig'))
 % fprintf('Data saved.\n')
 
 

@@ -7,7 +7,7 @@
 clear; clc; close('all');
 
 % Add paths needed for loading data and using functions
-addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Krnacik'));
+addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Krnacik'))
 % addpath('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Optimizer functions and data')
 % addpath('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\IC_check')
 % addpath('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Results\AllTrialResultsD1_knee')
@@ -53,8 +53,8 @@ time_step = 0.001;                                                  % [ s ]
 % Load starting conditions from the optimized trials for the hip and knee,
 % and the IC for the ankle from a hand optimization.
 dynchk_results = load('-mat', 'HandOPTkneeD1_IC');
-kneeOPT = load('-mat', 'AllTrialsKneeResults');
-hipOPT = load('-mat', 'AllTrialsHipResults');
+kneeOPT = load('-mat', 'AllTrialsKneeResultsD1');
+hipOPT = load('-mat', 'AllTrialsHipResultsD1');
 
 % Set initial conditions for the ankle based on hand optimized data
 b_i = dynchk_results.b_i(3);

@@ -1,4 +1,4 @@
-%% Parameter optimization for dog leg
+ %% Parameter optimization for dog leg
 
 % Optimizing repsonse for b, k values for the hip only, using optimized
 % knee values and set ankle values. Optimizer iterates through four trials
@@ -53,7 +53,7 @@ time_step = 0.001;                                                  % [ s ]
 % Load starting conditions from hand optimized trials isolating the hip and
 % the knee/ankle, and the results of the knee optimization
 dynchk_results = load('-mat', 'HandOPTkneeD1_IC');
-kneeOPT = load('-mat', 'AllTrialsKneeResults');
+kneeOPT = load('-mat', 'AllTrialsKneeResultsD1');
 
 % Set initial conditions for the hip
 b_i = dynchk_results.b_i(1) * 0.75;

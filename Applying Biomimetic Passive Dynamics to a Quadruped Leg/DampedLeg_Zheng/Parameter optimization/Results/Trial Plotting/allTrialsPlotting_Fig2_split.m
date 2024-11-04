@@ -6,7 +6,7 @@ clc
 
 % Add paths needed for loading data and using functions
 
-addpath(genpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik'))
+% addpath(genpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik'))
 addpath(genpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Zheng'))
 % addpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer functions and data')
 % addpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\IC_check')

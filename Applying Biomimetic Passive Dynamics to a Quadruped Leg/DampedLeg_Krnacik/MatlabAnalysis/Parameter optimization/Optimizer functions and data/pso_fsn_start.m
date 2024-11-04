@@ -30,7 +30,7 @@ X(1,:) = IC_data;
 
 % Initialize data
 pbest           = X;
-pbest_err       = f_epochD3R3(pbest, 0, data); %calls the function that iterates an epoch
+pbest_err       = f_epochD3(pbest, 0, data); %calls the function that iterates an epoch
 [gbest_err,I]   = min(pbest_err);
 gbest           = pbest(I,:);
 
@@ -61,7 +61,7 @@ for n = 1:n_iterations
     X(X > UB ) = UB(X > UB);
     
     % Calculate error for this time step
-    err = f_epochD3R3(X, n+1, data);
+    err = f_epochD3(X, n+1, data);
     
     % Store config values
     this_config = [X err];

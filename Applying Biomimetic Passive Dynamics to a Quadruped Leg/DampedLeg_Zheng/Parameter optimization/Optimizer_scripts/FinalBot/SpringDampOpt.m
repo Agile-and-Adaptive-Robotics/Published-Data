@@ -4,7 +4,7 @@
 clear; clc; close('all');
 
 % Add paths needed for loading data and using functions
-addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Krnacik'))
+% addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Krnacik'))
 addpath(genpath('C:\GitHub\Published-Data\Applying Biomimetic Passive Dynamics to a Quadruped Leg\DampedLeg_Zheng'))
 % addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer functions and data')
 % addpath('C:\GitHub\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\IC_check')
@@ -129,7 +129,7 @@ for n = 1:3
          % Define which trial to use
          trial = 4;
          thetas = data_temp(:, (trial*3-2):trial*3);
-%          thetas = data_temp(:, (trial));
+%        thetas = data_temp(:, (trial));
 
         % Interpolate data so that risetime may be more accurate
         tt = 0:0.0001:time(end);

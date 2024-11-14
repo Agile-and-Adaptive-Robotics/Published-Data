@@ -3,11 +3,11 @@
 clear
 % close all
 % clc
-
+%%
 % Add paths needed for loading data and using functions
-addpath(genpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik'))
+
+% addpath(genpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik'))
 addpath(genpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Zheng'))
-% addpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Optimizer functions and data')
 % addpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\IC_check')
 % addpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Parameter optimization\Results')
 % addpath('C:\Github\Quadruped_Robot\Code\Matlab\Analysis\DampedLeg_Krnacik\Haonan\Comparison\No Damping')
@@ -25,10 +25,10 @@ muscles = 1:7;
 trials = [5 1 1 1 1 1 1];
 muscle_names = {'IP', 'GS', 'ST', 'ST2', 'VL', 'BFp', 'BFa'};
 
-fig = figure('Color', 'w');
+% fig = figure('Color', 'w');
 % sgtitle({'Comparison of Quadruped Hind Leg With and Without Integrated Passive Dynamics to Scaled Rat Leg Data',' '})
 
-for n = 1:length(muscles)
+n = 2; % Plotting GS muscle stimulation only
     
     % Choose muscle and trial, and starting index value (check figure from
     % "plotjdat" in RawDataPlottingProcessing folder. All starting values
@@ -49,53 +49,50 @@ for n = 1:length(muscles)
     thetas = jdata{1}{muscle, trial}(start_index:end_index, :) * (2 * pi)/360;      % [rad]
     thetas = rad2deg(thetas);                                                       % [deg]
     
-    subplot(2, 4, n)
     
     % Create graph set-up
-    title(strcat(muscle_names(n)))
-    if n == 1 || n==5
-        ylabel('Joint angles (deg)')
-    end
-    if n == 6
-        xlabel('Time (s)'); 
-    end
+    figure
+    hold on
+    % title(strcat({'Muscle stimulated: '}, muscle_names(n), {', Trial chosen: '}, num2str(trial)))
+    % title('Comparison of Quadruped Hind Leg With and Without Integrated Passive Dynamics to Scaled Rat Leg Data','FontSize',15)
+    xlabel('Time (s)','FontSize',15)
+    ylabel('Joint angles (deg)','FontSize',15)
     xlim([0 1.4]); ylim([80 180])
     
-    hold on
-    
     % Plot all three joint angles
-    plot(time, thetas(:,1), '-k', 'Linewidth', 2) %, 'MarkerSize', 3)
-    plot(time, thetas(:,2), '-b', 'Linewidth', 2) %, 'MarkerSize', 3)
-    plot(time, thetas(:,3), '-r', 'Linewidth', 2) %, 'MarkerSize', 3)
+    plot(time, thetas(:,1), '-k','LineWidth', 2)
+    plot(time, thetas(:,2), '-b','LineWidth', 2)
+    plot(time, thetas(:,3), '-r','LineWidth', 2)
    
-    plot(data1(:,4),data1(:,1),':k', 'Linewidth', 2);
-    plot(data1(:,4),data1(:,2),':b', 'Linewidth', 2);
-    plot(data1(:,4),data1(:,3),':r', 'Linewidth', 2);
-        
-    plot(data2(:,4),data2(:,1),'--k', 'Linewidth', 2);
-    plot(data2(:,4),data2(:,2),'--b', 'Linewidth', 2);
-    plot(data2(:,4),data2(:,3),'--r', 'Linewidth', 2);
+    a = 0.3;
+    markerSize = 5;
     
-%         plot(data1(:,4),data1(:,1),'ok','MarkerSize',1);
-%         plot(data1(:,4),data1(:,2),'ob','MarkerSize',1);
-%         plot(data1(:,4),data1(:,3),'or','MarkerSize',1);
+%     hip1 = scatter(data1(:,4),data1(:,1),markerSize,'k','filled');
+%     knee1 = scatter(data1(:,4),data1(:,2),markerSize,'b','filled');
+%     ankle1 = scatter(data1(:,4),data1(:,3),markerSize,'r','filled');
+%     alpha(hip1,0.7)
+%     alpha(knee1,0.7)
+%     alpha(ankle1,0.7)
 %         
-%         plot(data2(:,4),data2(:,1),'^k','MarkerSize',1);
-%         plot(data2(:,4),data2(:,2),'^b','MarkerSize',1);
-%         plot(data2(:,4),data2(:,3),'^r','MarkerSize',1);
+%     hip2 = scatter(data2(:,4),data2(:,1),markerSize,'k','filled',"square");
+%     knee2 = scatter(data2(:,4),data2(:,2),markerSize,'b','filled',"square");
+%     ankle2 = scatter(data2(:,4),data2(:,3),markerSize,'r','filled',"square");
+%     alpha(hip2,a)
+%     alpha(knee2,a)
+%     alpha(ankle2,a)
 
-end
+        plot(data1(:,4),data1(:,1),':k','LineWidth',3);
+        plot(data1(:,4),data1(:,2),':b','LineWidth',3);
+        plot(data1(:,4),data1(:,3),':r','LineWidth',3);
+        
+        plot(data2(:,4),data2(:,1),'--k','LineWidth',2);
+        plot(data2(:,4),data2(:,2),'--b','LineWidth',2);
+        plot(data2(:,4),data2(:,3),'--r','LineWidth',2);
 
-x0=500;
-y0=500;
-width=900;
-height=400;
-set(gcf,'position',[x0,y0,width,height])
-
-subplot(2, 4, 7)
-legend('Hip (scaled rat)', 'Knee (scaled rat)', 'Ankle (scaled rat)','Hip with springs & dampers)','Knee with springs & dampers','Ankle with springs & dampers','Hip without springs or dampers','Knee without springs or dampers','Ankle without springs or dampers')
-legend('Location','southeast')
-
+hold off
+% legend('Hip (scaled rat)','Hip (novel leg)')
+legend('Hip (scaled rat)', 'Knee (scaled rat)', 'Ankle (scaled rat)');%,'Hip (novel leg)','Knee (novel leg)','Ankle (novel leg)','Hip (original leg)','Knee (original leg)','Ankle (original leg)')
+title('Muscle stimulated: GS, Trial chosen:1','FontSize',15)
 % save figure
 % addpath('C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Trial plotting')
 % saveas(fig, 'C:\Users\krnac\OneDrive\Desktop\School\Dynamic leg\Krnacik\Parameter optimization\Trial plotting\Plotted_trials.fig')
